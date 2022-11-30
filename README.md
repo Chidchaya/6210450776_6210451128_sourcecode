@@ -19,6 +19,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/rings_project
 ของตัวเอง และบรรทัด spring.datasource.password ให้ตั้งเป็นรหัสผ่านของ MySQL ของตัวเอง
 2. เปิด MySQL Workbench และสร้าง schema ชื่อ rings_project
 3. รันโปรแกรม ring และ ringsRunner พร้อมกัน
+4. เปิดบราวเซอร์และเข้าลิ้งค์ http://localhost:8080/
 
 วิธีการใช้ AR
 1. ใช้อุปกรณ์ที่มีกล้องหลังและอินเตอร์เน็ตในการสแกนรูปภาพ QR Code ข้างรูปภาพ
