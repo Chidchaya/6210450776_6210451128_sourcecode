@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Rings Shop Service Website</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/myScript.js}"></script>
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td)
+                {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().localeCompare(filter) === 0)
+                    {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+</head>
+<style>
+    body
+    {
+        /*            background-image: url('https://wallpaperaccess.com/full/2029165.jpg');*/
+        background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://i.ibb.co/fv4N8Gq/Vintage-Gold-Diamond-Engagement-Ring-Isolated-on-Black-Background.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+<body>
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container container-fluid" style="background-color:white; margin-top:30px; border-radius:25px;">
+    <h1 class="display-6">รายการสั่งซื้อสินค้า</h1>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+        <div>
+            <tr scope="column">
+                <th>วันที่</th>
+                <th>ชื่อ</th>
+                <th>เบอร์ติดต่อ</th>
+                <th>ที่อยู่</th>
+                <th>ชื่อสินค้า</th>
+                <th>ราคา</th>
+                <th>จำนวนสินค้า</th>
+                <th>สถานะ</th>
+                <th>วันที่ชำระเงิน</th>
+
+            </tr>
+        </div>
+        </thead>
+        <tbody>
+        <div th:each="order : ${ringslist}">
+            <tr id="list" class="ord"  scope="row">
+
+                <td th:text="${order.date}"></td>
+                <td th:text="${order.name}"></td>
+                <td th:text="${order.mobile}"></td>
+                <td th:text="${order.address}"></td>
+                <td >
+                    <ul th:each="i : ${order.getCartList()}">
+                        <span th:text="${i.getRings().name}"></span>
+                    </ul>
+                </td>
+                <td >
+                    <ul th:each="i : ${order.getCartList()}">
+                        <span th:text="${i.getRings().getPrice()}+ '&#3647;'"></span>
+                    </ul>
+                </td>
+                <td >
+                    <ul th:each="i : ${order.getCartList()}">
+                        <span th:text="${i.getQuantity()}"></span>
+                    </ul>
+                </td>
+                <td th:text="${order.status}"></td>
+                <td th:text="${order.payment}"></td>
+                <td sec:authorize="hasRole('ADMIN')" style="text-align: center">
+                    <a th:href="@{/order/list/edit/{id}(id=${order.getOrderId()})}" ><button type="button" class="btn btn-primary">ชำระแล้ว</button>
+                    </a>
+                </td>
+                <td sec:authorize="hasRole('ADMIN')" style="text-align: center">
+                    <a th:href="@{/order/list/remove/{id}(id=${order.getOrderId()})}" ><button type="button" class="btn btn-primary" onclick="return confirm('ต้องการลบรายการสั่งซื้อนี้หรือไม่')">ลบรายการสั่งซื้อ</button>
+                    </a>
+                </td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

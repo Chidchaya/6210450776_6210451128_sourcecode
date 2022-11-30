@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Rings Shop Service Website</title>
+  <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<style>
+  body
+  {
+    /*            background-image: url('https://wallpaperaccess.com/full/2029165.jpg');*/
+    background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://i.ibb.co/fv4N8Gq/Vintage-Gold-Diamond-Engagement-Ring-Isolated-on-Black-Background.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+</style>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="container" style="background-color:white; margin-top:30px; border-radius:25px;">
+  <h1 class="display-6">ตะกร้า</h1>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>รูปภาพ</th>
+      <th>ชื่อสินค้า</th>
+      <th>ราคาสินค้า</th>
+      <th>จำนวนสินค้า</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ring : ${carts}">
+      <td><img th:src=" ${'../../images/' + ring.getRings().name+ '.png'} " width="100">
+      </img></td>
+      <td th:text="${ring.getRings().name}"></td>
+      <td th:text="${ring.getRings().price}"></td>
+      <td th:text="${ring.getQuantity()}"></td>
+      <td>
+        <a th:href="@{/cart/remove/{id}(id=${ring.getRings().id})}">
+          <button type="button" class="btn btn-primary">ลบสินค้าออกจากตะกร้า</button>
+        </a>
+      </td>
+
+    </tr>
+    <h1 th:text="${'รวม '+ priceCal +' บาท'}"></h1>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    <a  class="btn btn-primary" th:href="@{/order/list}" type="submit">ชำระเงิน</a>
+  </div>
+  <div>
+    <a class="btn btn-primary" th:href="@{/rings}">กลับสู่หน้ารายการสินค้า</a>
+  </div>
+</div>
+</body>
+</html>

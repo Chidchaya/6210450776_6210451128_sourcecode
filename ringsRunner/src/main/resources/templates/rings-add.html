@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rings Shop Service Website</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<style>
+    body
+    {
+        /*            background-image: url('https://wallpaperaccess.com/full/2029165.jpg');*/
+        background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://i.ibb.co/fv4N8Gq/Vintage-Gold-Diamond-Engagement-Ring-Isolated-on-Black-Background.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+<body>
+    <div th:insert="fragments/header :: header"></div>
+
+
+    <div class="container" style="background-color:white; margin-top:20px;padding-bottom: 20px;border-radius: 25px;">
+        <h1 class="display-6 text-center">เพิ่มสินค้า</h1>
+        <div class="alert alert-danger" style = "padding-top: 20px;padding-bottom: 20px; text-align: center"  role="alert" th:text="${error}" th:if="${error}"></div>
+
+        <form th:action="@{/rings/add}" method="POST">
+
+            <div class="mb-3">
+                <label for="nameInput" class="form-label">ชื่อ:</label>
+                <input id="nameInput" type="text" class="form-control" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="priceInput" class="form-label">ราคา:</label>
+                <input id="priceInput" type="text" class="form-control" name="price">
+            </div>
+            <div class="mb-3">
+                <label for="sizeInput" class="form-label">ขนาด:</label>
+                <input id="sizeInput" type="text" class="form-control" name="size">
+            </div>
+            <div class="mb-3">
+                <label for="amountInput" class="form-label">จำนวน:</label>
+                <input id="amountInput" type="text" class="form-control" name="amount">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" onclick="return confirm('กรุณาตรวจสอบข้อมูลให้ถูกต้อง ครบถ้วน')">เพิ่มสินค้าเข้าสู่หน้าเว็บไซต์</button>
+            </div>
+
+        </form>
+    </div>
+
+
+</body>
+</html>

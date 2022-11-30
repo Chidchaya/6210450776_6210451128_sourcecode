@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+
+<style>
+    body
+    {
+        /*            background-image: url('https://wallpaperaccess.com/full/2029165.jpg');*/
+        background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://i.ibb.co/fv4N8Gq/Vintage-Gold-Diamond-Engagement-Ring-Isolated-on-Black-Background.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="header">
+
+    <div class="container-fluid">
+        <img src="https://i.ibb.co/KWV5m5r/ring-logo-new-2.png" style="padding-left:1px;" alt="">
+        <div>
+            <h3 style="padding-left:20px ; text-align:center; color: darkblue ;font-size: 60px;">LUXURING SHOP</h3>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">หน้าหลัก</a>
+                </li>
+                <!--                <li sec:authorize="isAnonymous()" class="nav-item">-->
+                <!--                    <a class="nav-link" th:href="@{/vegetable}">Vegetable</a>-->
+                <!--                </li>-->
+                </li>
+                <li sec:authorize="hasRole('USER')" class="nav-item">
+                    <a class="nav-link" th:href="@{/rings}">สินค้า</a>
+                </li>
+                <li sec:authorize="hasRole('USER')" class="nav-item">
+                    <a class="nav-link" th:href="@{/order}">รายการสั่งซื้อ</a>
+                </li>
+                <li sec:authorize="hasRole('USER')" class="nav-item">
+                    <a class="nav-link" th:href="@{/cart}">ตะกร้า</a>
+                </li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
+                    <a class="nav-link" th:href="@{/rings}">แก้ไขข้อมูลสินค้า</a>
+                </li>
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
+                    <a class="nav-link" th:href="@{/order}">แก้ไขข้อมูลการสั่งซื้อ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contact}">ติดต่อ</a>
+                </li>
+                <div sec:authorize="isAnonymous()">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}">เข้าสู่ระบบ</a>
+                    </li>
+                </div>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/rings/add}">เพิ่มสินค้า</a>
+                    </li>
+                </div>
+                <!--                <div sec:authorize="hasRole('ADMIN')">-->
+                <!--                    <li class="nav-item">-->
+                <!--                        <a class="nav-link" th:href="@{/order/add}">Add order</a>-->
+                <!--                    </li>-->
+                <!--                </div>-->
+                <div sec:authorize="hasAnyRole('ADMIN','USER')">
+                    <!--                    hasAnyAuthority('ADMIN')-->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">ออกจากระบบ</a>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+</html>

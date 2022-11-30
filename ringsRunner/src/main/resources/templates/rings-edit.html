@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rings</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<style>
+    body
+    {
+        /*            background-image: url('https://wallpaperaccess.com/full/2029165.jpg');*/
+        background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://i.ibb.co/fv4N8Gq/Vintage-Gold-Diamond-Engagement-Ring-Isolated-on-Black-Background.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+<body>
+
+<div th:insert="fragments/header :: header"></div>
+
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+
+<div class="container" style="background-color:white; margin-top:20px;padding-bottom: 20px;border-radius: 25px;">
+    <h1 class="display-6 text-center">แก้ไขข้อมูลสินค้า</h1>
+
+    <form th:object="${rings}" th:action="@{/rings/edit}" method="POST">
+
+        <input type="hidden" th:field="*{id}" id="id">
+
+        <div class="mb-3">
+            <label for="nameInput" class="form-label">ชื่อ:</label>
+            <input id="nameInput" type="text" class="form-control" th:field="*{name}">
+        </div>
+        <div class="mb-3">
+            <label for="priceInput" class="form-label">ราคา:</label>
+            <input id="priceInput" type="text" class="form-control" th:field="*{price}">
+        </div>
+        <div class="mb-3">
+            <label for="sizeInput" class="form-label">ขนาด:</label>
+            <input id="sizeInput" type="text" class="form-control" th:field="*{size}">
+        </div>
+        <div class="mb-3">
+            <label for="amountInput" class="form-label">จำนวน:</label>
+            <input id="amountInput" type="text" class="form-control" th:field="*{amount}">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" onclick="alert('กรุณาตรวจสอบข้อมูลให้ถูกต้อง ครบถ้วน')">แก้ไขข้อมูลสินค้า</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
